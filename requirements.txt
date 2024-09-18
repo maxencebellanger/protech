@@ -1,3 +1,3 @@
 pyusb==1.2.1
 pyserial==3.5
-libusb==4.10.0.84
+opencv==4.10.0.84
