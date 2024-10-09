@@ -15,7 +15,7 @@ def main():
     list_usb_devices()
 
     # Essayer de trouver votre webcam spécifique
-    dev = usb.core.find(idVendor=0x322e, idProduct=0x202c) # ID de la webcam trouvé avec lsusb
+    dev = usb.core.find(idVendor=0x04f2, idProduct=0xb725) # ID de la webcam trouvé avec lsusb
 
     if dev is None:
         raise ValueError('Dispositif non trouvé')
@@ -41,15 +41,15 @@ def main():
             usb.util.endpoint_direction(e.bEndpointAddress) == 
             usb.util.ENDPOINT_OUT)
 
-    if ep is None:
-        print("Impossible de trouver l'endpoint OUT")
-    else:
-        # Ecriture des données
-        try:
-            ep.write(b'test')
-            print("Données écrites avec succès")
-        except usb.core.USBError as e:
-            print(f"Echec de l'écriture des données: {str(e)}")
+    #if ep is None:
+    #    print("Impossible de trouver l'endpoint OUT")
+    #else:
+    #    # Ecriture des données
+    #    try:
+    #        ep.write(b'test')
+    #        print("Données écrites avec succès")
+    #    except usb.core.USBError as e:
+    #        print(f"Echec de l'écriture des données: {str(e)}")
 
 if __name__ == "__main__":
     main()
