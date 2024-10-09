@@ -3,7 +3,7 @@ import usb.util
 
 try:
     # Trouver le périphérique USB
-    dev = usb.core.find(idVendor=0x04f2, idProduct=0xb725)
+    dev = usb.core.find(idVendor=0x3923, idProduct=0x76c6)
     if dev is None:
         raise ValueError('Device not found')
 

@@ -1,0 +1,69 @@
+DEVICE ID 3923:76c6 on Bus 003 Address 003 =================
+ bLength                :   0x12 (18 bytes)
+ bDescriptorType        :    0x1 Device
+ bcdUSB                 :  0x110 USB 1.1
+ bDeviceClass           :   0xff Vendor-specific
+ bDeviceSubClass        :    0x0
+ bDeviceProtocol        :    0x0
+ bMaxPacketSize0        :   0x40 (64 bytes)
+ idVendor               : 0x3923
+ idProduct              : 0x76c6
+ bcdDevice              :  0x100 Device 1.0
+ iManufacturer          :    0x1 National Instruments
+ iProduct               :    0x2 USB-6003
+ iSerialNumber          :    0x3 0328c3d9
+ bNumConfigurations     :    0x1
+  CONFIGURATION 1: 500 mA ==================================
+   bLength              :    0x9 (9 bytes)
+   bDescriptorType      :    0x2 Configuration
+   wTotalLength         :   0x35 (53 bytes)
+   bNumInterfaces       :    0x1
+   bConfigurationValue  :    0x1
+   iConfiguration       :    0x5 Bulk Data Configuration
+   bmAttributes         :   0x80 Bus Powered
+   bMaxPower            :   0xfa (500 mA)
+    INTERFACE 0: Vendor Specific ===========================
+     bLength            :    0x9 (9 bytes)
+     bDescriptorType    :    0x4 Interface
+     bInterfaceNumber   :    0x0
+     bAlternateSetting  :    0x0
+     bNumEndpoints      :    0x5
+     bInterfaceClass    :   0xff Vendor Specific
+     bInterfaceSubClass :    0x0
+     bInterfaceProtocol :    0x0
+     iInterface         :    0x4 Bulk Data Interface
+      ENDPOINT 0x81: Bulk IN ===============================
+       bLength          :    0x7 (7 bytes)
+       bDescriptorType  :    0x5 Endpoint
+       bEndpointAddress :   0x81 IN
+       bmAttributes     :    0x2 Bulk
+       wMaxPacketSize   :   0x40 (64 bytes)
+       bInterval        :    0x0
+      ENDPOINT 0x1: Bulk OUT ===============================
+       bLength          :    0x7 (7 bytes)
+       bDescriptorType  :    0x5 Endpoint
+       bEndpointAddress :    0x1 OUT
+       bmAttributes     :    0x2 Bulk
+       wMaxPacketSize   :   0x40 (64 bytes)
+       bInterval        :    0x0
+      ENDPOINT 0x82: Bulk IN ===============================
+       bLength          :    0x7 (7 bytes)
+       bDescriptorType  :    0x5 Endpoint
+       bEndpointAddress :   0x82 IN
+       bmAttributes     :    0x2 Bulk
+       wMaxPacketSize   :   0x40 (64 bytes)
+       bInterval        :    0x0
+      ENDPOINT 0x3: Bulk OUT ===============================
+       bLength          :    0x7 (7 bytes)
+       bDescriptorType  :    0x5 Endpoint
+       bEndpointAddress :    0x3 OUT
+       bmAttributes     :    0x2 Bulk
+       wMaxPacketSize   :   0x40 (64 bytes)
+       bInterval        :    0x0
+      ENDPOINT 0x84: Interrupt IN ==========================
+       bLength          :    0x7 (7 bytes)
+       bDescriptorType  :    0x5 Endpoint
+       bEndpointAddress :   0x84 IN
+       bmAttributes     :    0x3 Interrupt
+       wMaxPacketSize   :   0x40 (64 bytes)
+       bInterval        :    0x1

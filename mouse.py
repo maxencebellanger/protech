@@ -3,7 +3,7 @@ import usb.util
 import sys
 
 # Trouver la souris USB (dispositif HID)
-dev = usb.core.find(idVendor=0x046d, idProduct=0xc08d)  # Souris USB Logitech (exemple)
+dev = usb.core.find(idVendor=0x3923, idProduct=0x76c6)  # Souris USB Logitech (exemple)
 
 if dev is None:
     raise ValueError("Souris non trouvée. Assurez-vous qu'elle est connectée.")
@@ -22,6 +22,8 @@ dev.set_configuration()
 # Obtenir le premier point de terminaison (endpoint)
 cfg = dev.get_active_configuration()
 interface = cfg[(0, 0)]  # Sélectionner l'interface 0, configuration 0
+
+print(dev)
 
 # Les dispositifs USB HID ont généralement au moins un point de terminaison IN (réception)
 endpoint = usb.util.find_descriptor(
