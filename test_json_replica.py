@@ -1,7 +1,7 @@
 import json
 
 # Load the JSON data from the file
-with open('Dev1ai0_Continu_Différentielle_10-10_100-10.json') as f:
+with open('test.json') as f:
     packets = json.load(f)
 
 def print_usb_control_transfer(setup_data, dest):
