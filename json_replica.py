@@ -3,12 +3,12 @@ import usb.core
 import usb.util
 
 # Load the JSON data from the file
-with open('Dev1ai0_Continu_Différentielle_10-10_100-10.json') as f:
+with open('test.json') as f:
     packets = json.load(f)
 
 # Replace with actual vendor and product ID of your target device
-DEVICE_VENDOR_ID = 0x1234
-DEVICE_PRODUCT_ID = 0x5678
+DEVICE_VENDOR_ID = 0x3923
+DEVICE_PRODUCT_ID = 0x76c6
 
 # Find the USB device
 device = usb.core.find(idVendor=DEVICE_VENDOR_ID, idProduct=DEVICE_PRODUCT_ID)
