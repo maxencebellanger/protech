@@ -53,6 +53,7 @@ def read_usb_bulk_transfer(device, endpoint, data_len, dest):
         # Read the response from the device (on the same endpoint or another)
         response = device.read(endpoint, data_len)
         print(f"Bulk Transfer Response from {dest}: {response}")
+        print(f"\n\n\nTransferred Data (usb.pcapdata) from {dest}: {pcap_data}\n\n\n")
     except usb.core.USBError as e:
         print(f"USB Error (Bulk Read): {e}")
 
