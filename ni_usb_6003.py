@@ -171,9 +171,9 @@ class NiUsb6003:
 
     def packet_matches(self, actual, expected, mask):
         if len(actual) != len(expected):
-            print repr(actual)
-            print repr(expected)
-            print repr(mask)
+            print(repr(actual))
+            print(repr(expected))
+            print(repr(mask))
             raise ValueError('Protocol error - invalid response length %d' % len(actual))
 
         for b, e, m in zip(actual, expected, mask):
@@ -198,18 +198,18 @@ class NiUsb6003:
 #USAGE EXAMPLE
 if __name__ == "__main__":
     dev = get_adapter()
-
+    
     if not dev:
         raise Exception("No device found")
-
-    dev.set_io_mode(0b11111111, 0b11111111, 0b00000000)
-
-    dev.write_port(0, 0b11001100)
-    dev.write_port(1, 0b10101010)
-
-    print bin(dev.read_port(2))
-
-    ret = dev.set_io_mode(0, 255, 0)      # set all pins between 3-6 & 27-30 as output pins
+     
+    dev.set_io_mode(0b11111111, 0b1111, 0b0)
+    # 
+    # dev.write_port(0, 0b11001100)
+    # dev.write_port(1, 0b10101010)
+    # 
+    # print(bin(dev.read_port(2)))
+    # 
+    # ret = dev.set_io_mode(0, 255, 0)      # set all pins between 3-6 & 27-30 as output pins
     # example has special fokus on port 3 & 30, the values ot the others are all set to high
     # bitmask: 247: 1111 0111
     # 27: 1     low byte
@@ -221,26 +221,26 @@ if __name__ == "__main__":
     #  4: 1     
     #  3: 1     high byte
 
-    ret = dev.write_port(1, 0)  # both zero
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 247)  # 30 low
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 127)  # 3 low
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 247)  # 30 low
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 127)  # 3 low
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 0)  # both zero
-    print(dev.read_port(1))
-
-    ret = dev.write_port(1, 255)  # both high
-    print(dev.read_port(1))
-
-    dev.release_interface()     # clean exit, allows direct reuse without to replug the ni6501
-    del dev
+    #   ret = dev.write_port(1, 0)  # both zero
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 247)  # 30 low
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 127)  # 3 low
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 247)  # 30 low
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 127)  # 3 low
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 0)  # both zero
+    #   print(dev.read_port(1))
+    #   
+    #   ret = dev.write_port(1, 255)  # both high
+    #   print(dev.read_port(1))
+    #   
+    #   dev.release_interface()     # clean exit, allows direct reuse without to replug the ni6501
+    #   del dev
