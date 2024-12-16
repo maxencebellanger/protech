@@ -13,4 +13,4 @@ import matplotlib.pyplot as plt
 #  plt.show()
 
 connected_devices = nidaqmx.system.System.local().devices
-print(connected_devices.device_names)
+print(connected_devices.device_names)a
