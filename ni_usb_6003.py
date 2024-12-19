@@ -22,8 +22,6 @@ INSTALLATION
 
 ...and you are good to go.
 
-TODO
- - Counter operations
 """
 import usb.core
 import usb.util
@@ -77,20 +75,99 @@ class NiUsb6003:
         # due to "Resource busy"
         usb.util.dispose_resources(self.device)
 
-    def set_io_mode(self, port0, port1, port2):
+    def set_io_mode(self, channel, mode, config, freq, sample_base):
         """
-        Set mode for every IO pin. PIN modes are given in three groups (bitmasks represented by integers)
-        bit = 0: read
-        bit = 1: write
+        channel: 0 to 8
+        mode: 0 finite, 1 on demand, 2 continous
+        config: 0 differential, 1 asymetric
+        freq: 1 to 1e5
+        sample: 1 to +inf
         """
-        buf = list("\x02\x10\x00\x00\x00\x05\x00\x00\x00\x00\x05\x00\x00\x00\x00\x00")
 
-        buf[6] = chr(port0)
-        buf[7] = chr(port1)
-        buf[8] = chr(port2)
-        buf = ''.join(buf)
+        freq = hex(int(80000000/freq)).split("x")[1]
 
-        return self.send_request(0x12, buf)
+        sample = hex(sample_base).split("x")[1]
+
+        buf0 = list("\x0d\x30\x00\x00")
+        buf0 = ''.join(buf0)
+
+        req0 = self.send_request(0x09, buf0)
+        print(req0)
+
+        buf1 = list("\x0d\x30\x00\x00\x00\x03\x00\x00")
+        buf1[6] = chr(8+channel)
+        buf1 = ''.join(buf1)
+
+
+        req1 = self.send_request(0x08, buf1)
+        print(req1)
+
+        buf2 = list("\x0d\x60\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xFF\x00\x01\x00")
+        n = len(freq)
+        buf2[7] = freq[-2:]
+        for i in range(2, n, 2):
+            buf2[7-i//2] = chr(int(freq[-2-i:-i], 16))
+        
+        m = len(sample)
+        buf2[11] = sample[-2:]
+        for i in range(2, m, 2):
+            buf2[11-i//2] = chr(int(sample[-2-i:-i], 16))
+
+        buf2 = ''.join(buf2)
+        req2 = self.send_request(0x09, buf2)
+        print(req2)
+
+        buf3 = list("\x00\x02\x00\x02\x00\x00\x00\x00")
+        buf3[6] = chr(8+channel)
+
+        sample = hex(2*sample_base).split("x")[1]
+        m = len(sample)
+        buf3[7] = sample[-2:]
+        for i in range(2, m, 2):
+            buf3[7-i//2] = chr(int(sample[-2-i:-i], 16))
+
+        buf3 = ''.join(buf3)
+
+        req3 = self.send_request(0x08, buf3)
+        print(req3)
+
+        buf4 = list("\x0d\x60\x00\x00")
+        buf4 = ''.join(buf4)
+
+        req4 = self.send_request(0x0a, buf4)
+        print(req4)
+
+        buf5 = list("\x0d\x60\x00\x00\x00\x00\x00\x00")
+        buf5 = ''.join(buf5)
+
+        req5 = self.send_request(0x0b, buf5)
+        print(req5)
+
+        buf6 = list("\x0d\x60\x00\x00")
+        buf6 = ''.join(buf6)
+
+        req6 = self.send_request(0x0c, buf6)
+        print(req6)
+
+        buf7 = list("\x0d\x60\x00\x00")
+        buf7 = ''.join(buf7)
+
+        req7 = self.send_request(0x0d, buf7)
+        print(req7)
+
+        buf8 = list("\x0d\x60\x00\x00")
+        buf8 = ''.join(buf8)
+
+        req8 = self.send_request(0x0e, buf8)
+        print(req8)
+
+        buf9 = list("\x0d\x60\x00\x00")
+        buf9 = ''.join(buf9)
+
+        req9 = self.send_request(0x0f, buf9)
+        print(req9)
+
+        return 0
 
     def read_port(self, port):
         """
@@ -130,21 +207,6 @@ class NiUsb6003:
         return response
 
     ##########################################################
-    # TODO: COUNTERS ARE NOT YET IMPLEMENTED
-    ##########################################################
-    def read_counter(self):
-        pass
-
-    def write_counter(self):
-        pass
-
-    def start_counter(self):
-        pass
-
-    def stop_counter(self):
-        pass
-
-    ##########################################################
     # INTERNAL UTILITY FUNCTIONS
     ##########################################################
     EP_IN, EP_OUT = 0x81, 0x01
@@ -163,8 +225,8 @@ class NiUsb6003:
 
         buf = ''.join(buf) + request
 
-        assert self.device.write(self.EP_OUT, buf, self.INTERFACE) == len(buf)
-
+        if (not self.device.write(self.EP_OUT, buf, self.INTERFACE) == len(buf)):
+            pass
         ret = self.device.read(self.EP_IN, len(buf), self.INTERFACE)
 
         return ''.join([chr(x) for x in ret])[self.HEADER_PACKET:]
@@ -202,7 +264,7 @@ if __name__ == "__main__":
     if not dev:
         raise Exception("No device found")
      
-    dev.set_io_mode(0b11111111, 0b1111, 0b0)
+    dev.set_io_mode(1, 0,0,100, 10)
     # 
     # dev.write_port(0, 0b11001100)
     # dev.write_port(1, 0b10101010)
