@@ -41,7 +41,7 @@ try:
     while True:
         try:
             for endpoint in interface:
-                print("Endoint address: ", endpoint.bEndpointAddress)
+                print("Adresse de l'endpoint : ", endpoint.bEndpointAddress)
 
                 # Lire les données à partir du point de terminaison
                 data = dev.read(endpoint.bEndpointAddress, endpoint.wMaxPacketSize)  # Lire les paquets de données HID
