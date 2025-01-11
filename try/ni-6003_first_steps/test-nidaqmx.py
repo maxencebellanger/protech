@@ -2,6 +2,8 @@ import nidaqmx
 from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
 import matplotlib.pyplot as plt
 
+# DOES NOT WORK
+
 #with nidaqmx.Task() as task:
 #  task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
 #  task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
@@ -13,4 +15,4 @@ import matplotlib.pyplot as plt
 #  plt.show()
 
 connected_devices = nidaqmx.system.System.local().devices
-print(connected_devices.device_names)a
+print(connected_devices.device_names)
