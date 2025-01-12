@@ -33,20 +33,22 @@ def drawturtle(dev, endpoint):
     spiral = turtle.Turtle()
     spiral.speed(0)
     spiral.width(2)
-    spiral.color("black")
     
     spiral.isdown()
+    spiral.color("black")
+    screen.bgcolor("white")
+    
+    Button_Status = False
     
     def move_forward():
         spiral.forward(10)
 
     def switch():
-        if spiral.isdown():
-            spiral.penup() 
-            screen.bgcolor("red")
-        else:
-            spiral.pendown()  
-            screen.bgcolor("white")
+    	if not Button_Status:
+            if spiral.isdown():
+                spiral.penup() 
+            else:
+                spiral.pendown()  
     while True:
         raw_data = dev.read(endpoint.bEndpointAddress, endpoint.wMaxPacketSize)
         data = raw_data[10:14]
@@ -57,6 +59,18 @@ def drawturtle(dev, endpoint):
             break
         if boutons[6] == '1':
             switch()
+            Button_Status = True
+        if boutons[6] == '0':
+            Button_Status = False
+        if boutons[8] == '1':
+            screen.clear()
+            spiral = turtle.Turtle()
+            spiral.speed(0)
+            spiral.width(2)
+    
+            spiral.isdown()
+            spiral.color("black")
+            screen.bgcolor("white")
         if boutons[9] == '1':
             spiral.color("black")
         if boutons[10] == '1':
